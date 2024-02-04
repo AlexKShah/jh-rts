@@ -4,24 +4,24 @@ Alex Shah
  */
 
 //using a knock off arduino micro, assign pin 9 for led output, or use rx/tx led to blink
-int LEDPIN = 9;
-int RXLED = 17;
-int TXLED = 30;
+int iLEDPIN = 9;
+int iRXLED = 17;
+int iTXLED = 30;
 
 //1 unit for dot
 //3 units for dash
 //1 unit between dot/dash in same letter
 //3 units space between letters
 //7 units between words
-int unit = 300;
+int iUnit = 300;
 
 //use control + Z to terminate loop, ascii character is '\x1A'
-bool interrupt_flag = false;
+bool fInterrupt = false;
 
 void setup() {
-  pinMode(LEDPIN, OUTPUT);
-  pinMode(RXLED, OUTPUT);
-  pinMode(TXLED, OUTPUT);
+  pinMode(iLEDPIN, OUTPUT);
+  pinMode(iRXLED, OUTPUT);
+  pinMode(iTXLED, OUTPUT);
 
   Serial.begin(9600);
   while (!Serial) {
@@ -32,13 +32,13 @@ void setup() {
 }
 
 void loop() {
-  while (!interrupt_flag) {
+  while (!fInterrupt) {
     if (Serial.available()) {
       // convert input to morse code until interrupted with control + Z, or QQ because control + z not sent through Arduino IDE
       String input = Serial.readStringUntil('\n');
       input.trim();
       if (input == '\x1A' || input.equalsIgnoreCase("QQ")) {
-        interrupt_flag = true;
+        fInterrupt = true;
       } else {
         show_morse(input);
         stop_leds();
@@ -229,41 +229,41 @@ void show_morse(String input) {
 }
 
 void letter_space() {
-  delay(3 * unit);
+  delay(3 * iUnit);
 }
 
 void word_space() {
-  delay(7 * unit);
+  delay(7 * iUnit);
 }
 
 void dot() {
   //dot on for 1 unit
-  digitalWrite(LEDPIN, HIGH);
-  digitalWrite(RXLED, LOW);
-  digitalWrite(TXLED, LOW);
-  delay(unit);
+  digitalWrite(iLEDPIN, HIGH);
+  digitalWrite(iRXLED, LOW);
+  digitalWrite(iTXLED, LOW);
+  delay(iUnit);
   //delay 1 unit between dot/dash
-  digitalWrite(LEDPIN, LOW);
-  digitalWrite(RXLED, HIGH);
-  digitalWrite(TXLED, HIGH);
-  delay(unit);
+  digitalWrite(iLEDPIN, LOW);
+  digitalWrite(iRXLED, HIGH);
+  digitalWrite(iTXLED, HIGH);
+  delay(iUnit);
 }
 
 void dash() {
   //dash on for 3 units
-  digitalWrite(LEDPIN, HIGH);
-  digitalWrite(RXLED, LOW);
-  digitalWrite(TXLED, LOW);
-  delay(3 * unit);
+  digitalWrite(iLEDPIN, HIGH);
+  digitalWrite(iRXLED, LOW);
+  digitalWrite(iTXLED, LOW);
+  delay(3 * iUnit);
   //delay 1 unit between dot/dash
-  digitalWrite(LEDPIN, LOW);
-  digitalWrite(RXLED, HIGH);
-  digitalWrite(TXLED, HIGH);
-  delay(unit);
+  digitalWrite(iLEDPIN, LOW);
+  digitalWrite(iRXLED, HIGH);
+  digitalWrite(iTXLED, HIGH);
+  delay(iUnit);
 }
 
 void stop_leds() {
-  digitalWrite(LEDPIN, LOW);
-  digitalWrite(RXLED, HIGH);
-  digitalWrite(TXLED, HIGH);
+  digitalWrite(iLEDPIN, LOW);
+  digitalWrite(iRXLED, HIGH);
+  digitalWrite(iTXLED, HIGH);
 }
