@@ -40,6 +40,10 @@ void loop() {
       if (input == '\x1A' || input.equalsIgnoreCase("QQ")) {
         fInterrupt = true;
       } else {
+        //sleep to prevent first input getting eaten
+        stop_leds();
+        delay(2000);
+        
         show_morse(input);
         stop_leds();
       }
