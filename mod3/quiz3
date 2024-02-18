@@ -1,0 +1,41 @@
+ Question 1
+20 / 20 pts
+"How fast does my system respond to each interrupt?" Select all which are true.
+  The shortest period of time during which that interrupt is (or all interrupts are) disabled.
+  * The period of time it takes to execute any interrupt routines for interrupts that are of higher priority than the one in question.
+  * How long it takes the microprocessor to stop what it is doing, do the necessary bookkeeping, and start executing instructions within the interrupt routine.
+  * How long it takes the interrupt routine to save the context and then do enough work that what it has accomplished counts as a "response".
+ 
+Question 2
+20 / 20 pts
+When the microprocessor detects that a signal attached to one of its interrupt request pins is asserted, select all operations that it performs.
+  * Stops executing the sequence of instructions it was executing
+  * Saves on the stack the address of the instruction that would have been next
+  Saves all of the processor registers
+  * Jumps to an interrupt routine
+ 
+Question 3
+20 / 20 pts
+If an interrupt is signaled while the interrupts are disabled, in most cases the microprocessor will remember the interrupt until interrupts are reenabled.  At which point it will jump to the interrupt routine. If more than one interrupt is signaled while interrupts are disabled, the microprocessor will do them in priority order when interrupts are reenabled.  Interrupts, therefore, are not really disabled; they are merely deferred.
+  * True
+  False
+ 
+Question 4
+20 / 20 pts
+Nonmaskable interrupts cannot be disabled and are used for events that are completely beyond the normal range of ordinary processing such as power failure.  When there is a power failure what occurs?
+  Embedded processors always have some rudimentary form of battery backup for power failures which allow them to continue executing for a short period of time.
+  Embedded processers are designed with backup power supplies so the power failure is used to notify the processor it has switched to the alternate power supply.
+  * Processors are designed with capacitors to mitigate short brown outs of circuits and their capacitance allows the processor to continue executing for some number of microseconds after power failure.
+  Processors are designed with voltage inductors which continue to provide current to vital processor circuits during power failures.
+ 
+IncorrectQuestion 5
+0 / 20 pts
+
+In the Figure shown, when an interrupt occurs the ISR is pushing both Register 1 and Register 2 on the stack.  Register 1 is being pushed as it is being used in the ISR and upon return to the Task Code the register must retain its value prior to the occurrence of the interrupt.  Why is Register 2 also being pushed?
+
+M3quizpic.png
+  Whenever an odd numbered register is pushed the following even numbered register must also be pushed.
+  The first two instructions of an ISR must always push registers.
+  Based on what is shown in the Task Code and ISR, this figure in Simon’s text is wasting precious execution time unnecessarily pushing Register 2.
+  Whenever iFarnht is negative, Skiddo requires that R2 have been previously pushed to the second stack location.
+Quiz Score: 80 out of 100
