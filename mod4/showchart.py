@@ -10,21 +10,20 @@ def parse_and_plot_data(input_file):
     with open(input_file, 'r') as f_input:
         csv_reader = csv.reader(f_input)
         next(csv_reader)  # Skip header
-        
+
         for row in csv_reader:
-            time_str, data_str = row
-            time = datetime.strptime(time_str, '%H:%M:%S.%f')
-            value = float(data_str)
-            
+            millis, temp_str = row
+            time = datetime.fromtimestamp(int(millis) / 1000.0)  # Convert millis to seconds
+            value = float(temp_str)
+                
             times.append(time)
             data.append(value)
     
     plt.plot(times, data)
-    plt.xlabel('Time')
     plt.ylabel('Temp (F)')
     plt.title('Temperature Over Time')
-    plt.xticks(rotation=45)
-    plt.grid(True)
+    plt.xlabel('Time')
+    plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
     plt.show()
 
 # Example usage:
