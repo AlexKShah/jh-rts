@@ -4,13 +4,11 @@ import csv
 def parse_data(input_file, output_file):
     with open(input_file, 'r') as f_input, open(output_file, 'w', newline='') as f_output:
         csv_writer = csv.writer(f_output)
-        csv_writer.writerow(['Time', 'Data'])  # Writing header
+        csv_writer.writerow(['Millis', 'Temperature (F)'])  # Writing header
         
         for line in f_input:
-            time_data = line.strip().split(' -> ')
-            if len(time_data) == 2:  # Ensure the line is in the expected format
-                time, data = time_data
-                csv_writer.writerow([time, data])
+            millis, temp = line.strip().split(', ')
+            csv_writer.writerow([millis, temp])
 
 # Example usage:
 input_file = 'temp.csv'  # Change this to the name of your input file
