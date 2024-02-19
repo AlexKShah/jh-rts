@@ -20,11 +20,13 @@ void setup() {
   TCCR1A = 0;
   TCCR1B = 0;
   //set cs12, cs10 bits for prescalar 1024
-  TCCR1B |= (1<<CS12)| (0<<CS11) | (1<<CS10);
+  TCCR1B |= B00000101;
   //use compare match by setting OCIE1A to 1
   TIMSK1 |= B00000010;
   //set compare register A ~ 5 sec
   OCR1A = 15625;
+  //Reset Timer 1 value to 0
+  TCNT1 = 0;
   sei(); //resume interrupts
 }
 
@@ -48,5 +50,6 @@ void readTemperature() {
 }
 
 ISR(TIMER1_COMPA_vect) {
+  TCNT1  = 0;
   readTemperature();
 }
